@@ -10,25 +10,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-//@RequestMapping("expeLaboral")
-//@CrossOrigin(origins = "http://localhostos:4200")
+@RestController
+@RequestMapping("/laboral")
+@CrossOrigin(origins = "http://localhostos:4200")
 public class ExperienciaController {
     @Autowired
     SExperiencia sExperiencia;
 
-    @GetMapping("expeLaboral/listaExeperiencia")
+    @GetMapping("/listaExeperiencia")
     @ResponseBody
     public List<Experiencia> list(){
         return sExperiencia.list();
     }
 
-    @PostMapping("expeLaboral/createExperiencia")
+    @PostMapping("/createExperiencia")
     public ResponseEntity<?> create(@RequestBody dtoExperiencia dtoExpe){
         if(StringUtils.isBlank(dtoExpe.getNombreExp()))
             return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
@@ -41,9 +40,9 @@ public class ExperienciaController {
         sExperiencia.save(experiencia);
         return new ResponseEntity<>(new Mensaje("Experiencia agregada"), HttpStatus.OK);
     }
-    @PutMapping("expeLaboral/updateExperiencia/{idExpe}")
-    public ResponseEntity<?> update(@PathVariable("id") Long idExp, @RequestBody dtoExperiencia dtoExpe){
-        if(sExperiencia.existsById(idExp)) //Valida si existe el id
+    @PutMapping("/update/{idExp}")
+    public ResponseEntity<?> update(@PathVariable Long idExp, @RequestBody dtoExperiencia dtoExpe){
+        if(!sExperiencia.existsById(idExp)) //Valida si existe el id
             return new ResponseEntity<>(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST);
 
         if(sExperiencia.existsByNombreExp(dtoExpe.getNombreExp())&&
@@ -61,15 +60,15 @@ public class ExperienciaController {
         sExperiencia.save(experiencia);
         return new ResponseEntity<>(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
     }
-    @DeleteMapping("expeLaboral/deleteExperiencia/{idExp}")
+    @DeleteMapping("/delete/{idExp}")
 
     public String deleteExperiencia(@PathVariable Long idExp ) {
-       /* if (sExperiencia.existsById(idExp)) //Valida si existe el id
-            return "El id no existe";
-    */
-        sExperiencia.delete(idExp);
+        if (sExperiencia.existsById(idExp)) {//Valida si existe el id
+            sExperiencia.delete(idExp);
+            return "Experiencia eliminada";}
 
-        return "Experiencia eliminada";
+        return "El id no existe";
+
     }
 
 }
