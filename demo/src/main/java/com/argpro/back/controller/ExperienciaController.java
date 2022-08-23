@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/laboral")
+@RequestMapping("api/laboral")
 @CrossOrigin(origins = "http://localhostos:4200")
 public class ExperienciaController {
     @Autowired
     SExperiencia sExperiencia;
 
-    @GetMapping("/listaExeperiencia")
+    @GetMapping("/listaExperiencia")
     @ResponseBody
     public List<Experiencia> list(){
         return sExperiencia.list();

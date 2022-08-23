@@ -13,6 +13,9 @@ public class NuevoUsuario {
     @NotBlank
     @Email
     private String email;
+    @NotBlank
+    private String password;
+    private Set<String> roles = new HashSet<>();
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -22,9 +25,6 @@ public class NuevoUsuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    @NotBlank
-    private String password;
-    private Set<String> roles = new HashSet<>();
 
     public String getNombre() {
         return nombre;
