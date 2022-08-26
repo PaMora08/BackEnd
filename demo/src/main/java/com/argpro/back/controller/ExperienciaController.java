@@ -1,7 +1,5 @@
 package com.argpro.back.controller;
 
-
-
 import com.argpro.back.Dto.dtoExperiencia;
 import com.argpro.back.model.Experiencia;
 import com.argpro.back.security.Security.Controller.Mensaje;
@@ -13,14 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("api/laboral")
-@CrossOrigin(origins = "http://localhostos:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ExperienciaController {
     @Autowired
     SExperiencia sExperiencia;
-
     @GetMapping("/listaExperiencia")
     @ResponseBody
     public List<Experiencia> list(){

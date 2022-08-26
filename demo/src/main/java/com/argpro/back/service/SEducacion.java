@@ -1,14 +1,15 @@
-/*package com.argpro.back.service;
+package com.argpro.back.service;
 
 import com.argpro.back.model.Educacion;
-import com.argpro.back.model.Experiencia;
 import com.argpro.back.repository.EducacionRepo;
-import com.argpro.back.repository.ExperienciaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
+@Transactional
 public class SEducacion {
 
     @Autowired
@@ -20,8 +21,8 @@ public class SEducacion {
     public Optional<Educacion> getOne(Long idEdu){
         return eduRepo.findById(idEdu);
     }
-    public  Optional<Educacion> getByNombreEdu(String nombreEdu){
-        return eduRepo.findByNombreEdu(nombreEdu);
+    public  Optional<Educacion> getByNombreIns(String nombreInst){
+        return eduRepo.findByNombreInst(nombreInst);
     }
     public void save(Educacion educacion){
         eduRepo.save(educacion);
@@ -29,12 +30,16 @@ public class SEducacion {
     public void delete(Long idEdu){
         eduRepo.deleteById(idEdu);
     }
-    public boolean existsByNombreEdu(String nombreEdu){
-        return eduRepo.existsByNombreEdu(nombreEdu);
-    }
+    /*public boolean existsByTituloEdu(String titulo){
+        return eduRepo.existsByTituloEdu(titulo);
+    }*/
     public  boolean existsById(Long idEdu){
         return eduRepo.existsById(idEdu);
     }
+
+    public boolean existsByTituloEdu(String tituloEdu) {
+        return eduRepo.existsByTituloEdu(tituloEdu);
+    }
 }
-*/
+
 
