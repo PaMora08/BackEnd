@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
 
 @Setter
 @Getter
@@ -23,13 +22,14 @@ public class Educacion {
     @NotBlank
     private String tituloEdu;
     private String imgEdu;
-    private Date fechaInicioEdu;
-    private Date fechaFinEdu;
+    private int fechaInicioEdu;
+    private int fechaFinEdu;
 
     public Educacion() {
+
     }
 
-    public Educacion(String nombreInst, String tituloEdu, String imgEdu, Date fechaInicioEdu, Date fechaFinEdu) {
+    public Educacion(String nombreInst, String tituloEdu, String imgEdu, int fechaInicioEdu, int fechaFinEdu) {
         this.nombreInst = nombreInst;
         this.tituloEdu = tituloEdu;
         this.imgEdu = imgEdu;

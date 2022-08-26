@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
 
 @Getter
 @Setter
@@ -16,8 +15,8 @@ public class dtoEducacion {
     @NotBlank
     private String imgEdu;
     @NotBlank
-    private Date fechaInicioEdu;
-    private Date fechaFinEdu;
+    private int fechaInicioEdu;
+    private int fechaFinEdu;
 
 
     //Contructores
@@ -26,7 +25,7 @@ public class dtoEducacion {
     public dtoEducacion() {
     }
 
-    public dtoEducacion(String nombreInst, String tituloEdu, String imgEdu, Date fechaInicioEdu, Date fechaFinEdu) {
+    public dtoEducacion(String nombreInst, String tituloEdu, String imgEdu, int fechaInicioEdu, int fechaFinEdu) {
         this.nombreInst = nombreInst;
         this.tituloEdu = tituloEdu;
         this.imgEdu = imgEdu;
@@ -37,11 +36,11 @@ public class dtoEducacion {
         return tituloEdu;
     }
 
-    public Date getFechaInicioEdu() {
+    public int getFechaInicioEdu() {
         return fechaInicioEdu;
     }
 
-    public Date getFechaFinEdu() {
+    public int getFechaFinEdu() {
         return fechaFinEdu;
     }
 
@@ -54,11 +53,11 @@ public class dtoEducacion {
     }
 
 
-    public void setFechaInicioEdu(Date fechaInicioEdu) {
+    public void setFechaInicioEdu(int fechaInicioEdu) {
         this.fechaInicioEdu = fechaInicioEdu;
     }
 
-    public void setFechaFinEdu(Date fechaFinEdu) {
+    public void setFechaFinEdu(int fechaFinEdu) {
         this.fechaFinEdu = fechaFinEdu;
     }
 

@@ -36,25 +36,11 @@ public class ExperienciaController {
         sExperiencia.save(experiencia);
         return new ResponseEntity<>(new Mensaje("Experiencia agregada"), HttpStatus.OK);
     }
-    @PutMapping("/update/{idExp}")
-    public ResponseEntity<?> update(@PathVariable Long idExp, @RequestBody dtoExperiencia dtoExpe){
-        if(!sExperiencia.existsById(idExp)) //Valida si existe el id
-            return new ResponseEntity<>(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST);
+    @PutMapping("/update")
+    public ResponseEntity<?> update( @RequestBody Experiencia experiencia){
+    Experiencia actualizarExp = sExperiencia.editarExperiencia(experiencia);
+    return new ResponseEntity<>(actualizarExp, HttpStatus.OK);
 
-        if(sExperiencia.existsByNombreExp(dtoExpe.getNombreExp())&&
-                sExperiencia.getByNombreExp(dtoExpe.getNombreExp()).get().getIdExp() != idExp)
-            return new ResponseEntity<>(new Mensaje("Esa experiencia ya existe"), HttpStatus.BAD_REQUEST);
-
-        if(StringUtils.isBlank(dtoExpe.getNombreExp()))
-            return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-
-        Experiencia experiencia = sExperiencia.getOne(idExp).get();
-        experiencia.setNombreExp(dtoExpe.getNombreExp());
-        experiencia.setDescripcionExp((dtoExpe.getDescripcionExp()));
-        experiencia.setFechaFinExp(dtoExpe.getFechaFinExp());
-        experiencia.setFechaInicioExp(dtoExpe.getFechaInicioExp());
-        sExperiencia.save(experiencia);
-        return new ResponseEntity<>(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
     }
     @DeleteMapping("/delete/{idExp}")
 

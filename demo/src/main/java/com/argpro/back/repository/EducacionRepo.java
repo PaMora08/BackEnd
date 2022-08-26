@@ -10,6 +10,6 @@ public interface EducacionRepo extends JpaRepository<Educacion, Long> {
     public Optional<Educacion> findByNombreInst(String nombreInst);
     /*public boolean existsByTituloEdu(String titulo);*/
     public boolean existsByNombreInst(String nombreInst);
+    public boolean existsByTituloEdu(String tituloEdu);
 
-    boolean existsByTituloEdu(String tituloEdu);
 }

@@ -40,6 +40,7 @@ public class SEducacion {
     public boolean existsByTituloEdu(String tituloEdu) {
         return eduRepo.existsByTituloEdu(tituloEdu);
     }
+
 }
 
 

@@ -22,9 +22,9 @@ public class Persona {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idExp")
     private List<Experiencia> expList;
    /* @OneToMany(fetch = FetchType.LAZY, mappedBy = "idSkill")
-    private List<Skills> skillList;
+    private List<Skills> skillList;*/
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idEdu")
-    private List<Educacion> eduList;*/
+    private List<Educacion> eduList;
 
     //Constructores
 

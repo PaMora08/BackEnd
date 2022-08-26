@@ -37,4 +37,5 @@ public class SExperiencia {
     public  boolean existsById(Long idExp){
         return rExperiencia.existsById(idExp);
     }
+    public Experiencia editarExperiencia(Experiencia expe){ return rExperiencia.editarExperiencia(expe);}
 }
