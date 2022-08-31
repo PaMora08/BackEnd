@@ -1,6 +1,7 @@
 package com.argpro.back.service;
 
 import com.argpro.back.model.Educacion;
+import com.argpro.back.model.Persona;
 import com.argpro.back.model.Proyecto;
 import com.argpro.back.repository.ProyectoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,8 @@ public class SProyecto {
     }
     public boolean existsById(Long idProyecto) {
         return proyRepo.existsById(idProyecto);
+    }
+
+    public Proyecto editarProy(Proyecto proy) { return proyRepo.save(proy);
     }
 }

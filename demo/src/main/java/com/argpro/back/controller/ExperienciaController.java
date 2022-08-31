@@ -2,6 +2,7 @@ package com.argpro.back.controller;
 
 import com.argpro.back.Dto.dtoExperiencia;
 import com.argpro.back.model.Experiencia;
+import com.argpro.back.repository.ExperienciaRepo;
 import com.argpro.back.security.Security.Controller.Mensaje;
 import com.argpro.back.service.SExperiencia;
 import org.apache.commons.lang3.StringUtils;
@@ -17,9 +18,9 @@ import java.util.List;
 public class ExperienciaController {
     @Autowired
     SExperiencia sExperiencia;
-    @GetMapping("/listaExperiencia")
+   @GetMapping("/listaExperiencia")
     @ResponseBody
-    public List<Experiencia> list(){
+    public Iterable<Experiencia> list(){
         return sExperiencia.list();
     }
 
@@ -42,6 +43,7 @@ public class ExperienciaController {
     return new ResponseEntity<>(actualizarExp, HttpStatus.OK);
 
     }
+
     @DeleteMapping("/delete/{idExp}")
 
     public String deleteExperiencia(@PathVariable Long idExp ) {
@@ -50,7 +52,14 @@ public class ExperienciaController {
             return "Experiencia eliminada";}
 
         return "El id no existe";
+    }
 
+    @GetMapping("/detail/{idExp}")
+    public ResponseEntity<Experiencia> getById(@PathVariable("idExp") Long idExp){
+        if(!sExperiencia.existsById(idExp))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        Experiencia experiencia = sExperiencia.getOne(idExp).get();
+        return new ResponseEntity(experiencia, HttpStatus.OK);
     }
 
 }

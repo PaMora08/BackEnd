@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 
 @Service
 @Transactional
@@ -36,7 +34,7 @@ public class SPersona {
         return personaRepo.existsByNombre(nombre);
     }
 
-  public List<Persona> buscarPersona(){
+  public Iterable<Persona> buscarPersona(){
       return personaRepo.findAll();
   }
 

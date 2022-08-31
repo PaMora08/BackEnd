@@ -39,29 +39,16 @@ public class EducacionController {
         return new ResponseEntity<>(new Mensaje("Experiencia agregada"), HttpStatus.OK);
     }
 
-    @PutMapping("/update/{idEdu}")
-    public ResponseEntity<?> update(@PathVariable Long idEdu, @RequestBody dtoEducacion dtoEdu){
-        if(!sEdu.existsById(idEdu)) //Valida si existe el id
-            return new ResponseEntity<>(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST);
+    @PutMapping("/update")
+    public ResponseEntity<Educacion> update(@RequestBody Educacion edu){
+        Educacion actualizarEdu = sEdu.save(edu);
+        return new ResponseEntity<>(actualizarEdu, HttpStatus.OK);
 
-        if(sEdu.existsByTituloEdu(dtoEdu.getTituloEdu())&&
-                sEdu.getByNombreIns(dtoEdu.getNombreInst()).get().getIdEdu() != idEdu)
-            return new ResponseEntity<>(new Mensaje("Esa educación ya existe"), HttpStatus.BAD_REQUEST);
-
-        if(StringUtils.isBlank(dtoEdu.getTituloEdu()))
-            return new ResponseEntity<>(new Mensaje("El título es obligatorio"), HttpStatus.BAD_REQUEST);
-
-        Educacion edu = sEdu.getOne(idEdu).get();
-        edu.setTituloEdu(dtoEdu.getTituloEdu());
-        edu.setFechaFinEdu(dtoEdu.getFechaFinEdu());
-        edu.setFechaInicioEdu(dtoEdu.getFechaInicioEdu());
-        sEdu.save(edu);
-        return new ResponseEntity<>(new Mensaje("Experiencia actualizada"), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{idEdu}")
 
-    public String deleteEducacion(@PathVariable Long idEdu ) {
+    public String deleteEducacion(@PathVariable ("idEdu") Long idEdu ) {
         if (sEdu.existsById(idEdu)) {//Valida si existe el id
             sEdu.delete(idEdu);
             return "Educación eliminada";}

@@ -16,7 +16,7 @@ import java.sql.Date;
 public class Experiencia {
     
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
     private Long idExp;
     private String nombreExp;
     private Date fechaInicioExp;

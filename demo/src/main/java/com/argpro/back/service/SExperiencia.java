@@ -16,7 +16,7 @@ public class SExperiencia {
     @Autowired
     ExperienciaRepo rExperiencia;
 
-    public List<Experiencia> list(){
+    public Iterable<Experiencia> list(){
         return rExperiencia.findAll();
     }
     public Optional<Experiencia> getOne(Long idExp){
@@ -37,5 +37,5 @@ public class SExperiencia {
     public  boolean existsById(Long idExp){
         return rExperiencia.existsById(idExp);
     }
-    public Experiencia editarExperiencia(Experiencia expe){ return rExperiencia.editarExperiencia(expe);}
+    public Experiencia editarExperiencia(Experiencia expe){ return rExperiencia.save(expe);}
 }

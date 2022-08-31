@@ -24,23 +24,21 @@ public class SEducacion {
     public  Optional<Educacion> getByNombreIns(String nombreInst){
         return eduRepo.findByNombreInst(nombreInst);
     }
-    public void save(Educacion educacion){
+    public Educacion save(Educacion educacion){
         eduRepo.save(educacion);
+        return educacion;
     }
     public void delete(Long idEdu){
         eduRepo.deleteById(idEdu);
     }
-    /*public boolean existsByTituloEdu(String titulo){
-        return eduRepo.existsByTituloEdu(titulo);
-    }*/
-    public  boolean existsById(Long idEdu){
+     public  boolean existsById(Long idEdu){
         return eduRepo.existsById(idEdu);
     }
-
     public boolean existsByTituloEdu(String tituloEdu) {
         return eduRepo.existsByTituloEdu(tituloEdu);
     }
-
+    public Educacion editarEdu(Educacion edu) {  return eduRepo.save(edu);
+    }
 }
 
 

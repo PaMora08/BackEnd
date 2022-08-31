@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 public class Educacion {
 
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue (strategy= GenerationType.SEQUENCE)
     private Long idEdu;
     @NotBlank
     private String nombreInst;

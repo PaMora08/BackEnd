@@ -3,6 +3,7 @@ package com.argpro.back.controller;
 import com.argpro.back.Dto.dtoEducacion;
 import com.argpro.back.Dto.dtoProyecto;
 import com.argpro.back.model.Educacion;
+import com.argpro.back.model.Persona;
 import com.argpro.back.model.Proyecto;
 import com.argpro.back.security.Security.Controller.Mensaje;
 import com.argpro.back.service.SProyecto;
@@ -41,23 +42,10 @@ public class ProyectoController {
     }
 
     @PutMapping("/update/{idProyecto}")
-    public ResponseEntity<?> update(@PathVariable Long idProyecto, @RequestBody dtoProyecto dtoProy){
-        if(!proyServ.existsById(idProyecto)) //Valida si existe el id
-            return new ResponseEntity<>(new Mensaje("El id no existe"), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> update(@RequestBody Proyecto proy){
+            Proyecto editProy = proyServ.editarProy(proy);
+            return new ResponseEntity<>(editProy, HttpStatus.OK);
 
-        if(proyServ.existsByNombreProy(dtoProy.getNombreProy())&&
-                proyServ.getByNombreProyecto(dtoProy.getNombreProy()).get().getIdProyecto() != idProyecto)
-            return new ResponseEntity<>(new Mensaje("Ese proyecto ya existe"), HttpStatus.BAD_REQUEST);
-
-        if(StringUtils.isBlank(dtoProy.getNombreProy()))
-            return new ResponseEntity<>(new Mensaje("El nombre es obligatorio"), HttpStatus.BAD_REQUEST);
-
-        Proyecto proy = proyServ.getOne(idProyecto).get();
-        proy.setNombreProy(dtoProy.getNombreProy());
-        proy.setDescripcion(dtoProy.getDescripcion());
-        proy.setUrlProyecto(dtoProy.getUrlProyecto());
-        proyServ.save(proy);
-        return new ResponseEntity<>(new Mensaje("Proyecto actualizado"), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{idProyecto}")

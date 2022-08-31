@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idPersona;
     private String nombre;
     private String imgFondo;
