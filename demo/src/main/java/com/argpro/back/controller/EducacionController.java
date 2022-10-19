@@ -21,41 +21,43 @@ public class EducacionController {
 
     @GetMapping("/lista")
     @ResponseBody
-    public List<Educacion> list(){
+    public List<Educacion> list() {
         return sEdu.list();
     }
 
     @PostMapping("/createEducacion")
-    public ResponseEntity<?> create(@RequestBody dtoEducacion dtoEdu){
-        if(StringUtils.isBlank(dtoEdu.getTituloEdu()))
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestBody dtoEducacion dtoEdu) {
+        if (StringUtils.isBlank(dtoEdu.getTituloEdu()))
             return new ResponseEntity<>(new Mensaje("El título es obligatorio"), HttpStatus.BAD_REQUEST);
 
-        if(sEdu.existsByTituloEdu(dtoEdu.getTituloEdu()))
+        if (sEdu.existsByTituloEdu(dtoEdu.getTituloEdu()))
             return new ResponseEntity<>(new Mensaje("Esa educación ya existe"), HttpStatus.BAD_REQUEST);
 
-        Educacion educacion = new Educacion(dtoEdu.getNombreInst(), dtoEdu.getTituloEdu(),dtoEdu.getImagenEdu(),
+        Educacion educacion = new Educacion(dtoEdu.getNombreInst(), dtoEdu.getTituloEdu(), dtoEdu.getImagenEdu(),
                 dtoEdu.getFechaInicioEdu(), dtoEdu.getFechaFinEdu());
         sEdu.save(educacion);
         return new ResponseEntity<>(new Mensaje("Experiencia agregada"), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Educacion> update(@RequestBody Educacion edu){
+    @ResponseBody
+    public ResponseEntity<Educacion> update(@RequestBody Educacion edu) {
         Educacion actualizarEdu = sEdu.save(edu);
         return new ResponseEntity<>(actualizarEdu, HttpStatus.OK);
 
     }
 
     @DeleteMapping("/delete/{idEdu}")
-
-    public String deleteEducacion(@PathVariable ("idEdu") Long idEdu ) {
-        if (sEdu.existsById(idEdu)) {//Valida si existe el id
+    @ResponseBody
+    public ResponseEntity<?> deleteEducacion(@PathVariable("idEdu") Long idEdu) {
+        if (!sEdu.existsById(idEdu)) {//Valida si existe el id
+            return new ResponseEntity(new Mensaje("no existe esa educación"), HttpStatus.NOT_FOUND);
+        }
             sEdu.delete(idEdu);
-            return "Educación eliminada";}
-
-        return "El id no existe";
-
-    }
+            return new ResponseEntity<>(new Mensaje("educación eliminada"), HttpStatus.OK);
+        }
+ }
 
 
-}
+

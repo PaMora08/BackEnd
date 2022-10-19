@@ -2,7 +2,6 @@ package com.argpro.back.controller;
 
 import com.argpro.back.Dto.dtoExperiencia;
 import com.argpro.back.model.Experiencia;
-import com.argpro.back.repository.ExperienciaRepo;
 import com.argpro.back.security.Security.Controller.Mensaje;
 import com.argpro.back.service.SExperiencia;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/laboral")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -46,12 +46,12 @@ public class ExperienciaController {
 
     @DeleteMapping("/delete/{idExp}")
 
-    public String deleteExperiencia(@PathVariable Long idExp ) {
-        if (sExperiencia.existsById(idExp)) {//Valida si existe el id
-            sExperiencia.delete(idExp);
-            return "Experiencia eliminada";}
+    public ResponseEntity<?> deleteExperiencia(@PathVariable Long idExp ) {
+       if(!sExperiencia.existsById(idExp))
+           return new ResponseEntity(new Mensaje("no existe esa experiencia"), HttpStatus.NOT_FOUND);
 
-        return "El id no existe";
+       sExperiencia.delete(idExp);
+       return new ResponseEntity<>(new Mensaje("experiencia eliminada"), HttpStatus.OK);
     }
 
     @GetMapping("/detail/{idExp}")

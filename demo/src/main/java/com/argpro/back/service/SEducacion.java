@@ -37,8 +37,7 @@ public class SEducacion {
     public boolean existsByTituloEdu(String tituloEdu) {
         return eduRepo.existsByTituloEdu(tituloEdu);
     }
-    public Educacion editarEdu(Educacion edu) {  return eduRepo.save(edu);
-    }
+
 }
 
 
