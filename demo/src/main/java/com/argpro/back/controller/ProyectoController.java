@@ -1,10 +1,8 @@
 package com.argpro.back.controller;
 
-import com.argpro.back.Dto.dtoEducacion;
 import com.argpro.back.Dto.dtoProyecto;
-import com.argpro.back.model.Educacion;
-import com.argpro.back.model.Persona;
 import com.argpro.back.model.Proyecto;
+import com.argpro.back.model.Skill;
 import com.argpro.back.security.Security.Controller.Mensaje;
 import com.argpro.back.service.SProyecto;
 import org.apache.commons.lang3.StringUtils;
@@ -50,13 +48,20 @@ public class ProyectoController {
 
     @DeleteMapping("/delete/{idProyecto}")
 
-    public String deleteProyecto(@PathVariable Long idProyecto ) {
-        if (proyServ.existsById(idProyecto)) {//Valida si existe el id
-            proyServ.delete(idProyecto);
-            return "Proyecto eliminado";}
+    public ResponseEntity<?> deleteProyecto(@PathVariable Long idProy ) {
+        if(!proyServ.existsById(idProy))
+            return new ResponseEntity<>(new Mensaje("no existe ese proyecto"), HttpStatus.NOT_FOUND);
 
-        return "El id no existe";
+        proyServ.delete(idProy);
+        return new ResponseEntity<>(new Mensaje("proyecto eliminado"), HttpStatus.OK);
+    }
 
+    @GetMapping("/detail/{idProyecto}")
+    public ResponseEntity<Proyecto> getById(@PathVariable("idProyecto") Long idProyecto){
+        if(!proyServ.existsById(idProyecto))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        Proyecto proy = proyServ.getOne(idProyecto).get();
+        return new ResponseEntity(proy, HttpStatus.OK);
     }
 
 }

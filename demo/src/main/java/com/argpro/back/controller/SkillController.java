@@ -1,9 +1,7 @@
 package com.argpro.back.controller;
 
-import com.argpro.back.Dto.dtoEducacion;
 import com.argpro.back.Dto.dtoSkill;
-import com.argpro.back.model.Educacion;
-import com.argpro.back.model.Persona;
+import com.argpro.back.model.Experiencia;
 import com.argpro.back.model.Skill;
 import com.argpro.back.repository.SkillRepo;
 import com.argpro.back.security.Security.Controller.Mensaje;
@@ -12,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -53,12 +50,20 @@ public class SkillController {
     }
     @DeleteMapping("/delete/{idSkill}")
     @ResponseBody
-    public String deleteSkill(@PathVariable Long idSkill ) {
+    public ResponseEntity<?> deleteSkill(@PathVariable Long idSkill ) {
         if (serviSkill.existsById(idSkill)) {//Valida si existe el id
             serviSkill.delete(idSkill);
-            return "Experiencia eliminada";}
+            return new ResponseEntity<>(new Mensaje("proyecto eliminado"), HttpStatus.OK);}
 
-        return "El id no existe";
+        return new ResponseEntity<>(new Mensaje("no existe ese proyecto"), HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/detail/{idSkill}")
+    public ResponseEntity<Skill> getById(@PathVariable("idSkill") Long idSkill){
+        if(!serviSkill.existsById(idSkill))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        Skill skill = serviSkill.getOne(idSkill).get();
+        return new ResponseEntity(skill, HttpStatus.OK);
     }
 
 }

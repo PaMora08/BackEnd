@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -32,5 +34,8 @@ public class ServiSkill {
 
     public void save(Skill skill) {
         skillRepo.save(skill);
+    }
+
+    public Optional<Skill> getOne(Long idSkill) { return skillRepo.findById(idSkill);
     }
 }

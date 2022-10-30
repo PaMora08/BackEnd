@@ -6,7 +6,6 @@ import com.argpro.back.service.SPersona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,8 +24,7 @@ public class PersonaController {
     }
 
     @PutMapping("/editar")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Persona> actualizarPersona(@RequestBody Persona persona){
+    public ResponseEntity<?> actualizarPersona(@RequestBody Persona persona){
         Persona editPersona = perRepo.save(persona);
         return new ResponseEntity<>(editPersona, HttpStatus.OK);
     }
