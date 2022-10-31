@@ -13,8 +13,8 @@ public class Usuario {
     @NotNull
     private String nombre;
     @NotNull
-    @Column(unique = true)
     private String nombreUsuario;
+
     @NotNull
     private String email;
     @NotNull
@@ -51,14 +51,6 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -77,6 +69,14 @@ public class Usuario {
 
     public Set<Rol> getRoles() {
         return roles;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
     }
 
     public void setRoles(Set<Rol> roles) {

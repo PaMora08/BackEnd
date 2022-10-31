@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 public class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long idPersona;
     private String nombre;
     private String imgFondo;
@@ -21,14 +21,12 @@ public class Persona {
     private String acercaDe;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idExp")
     private List<Experiencia> expList;
-   /* @OneToMany(fetch = FetchType.LAZY, mappedBy = "idSkill")
-    private List<Skills> skillList;
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "idSkill")
+    private List<Skill> skillList;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idEdu")
-    private List<Educacion> eduList;*/
+    private List<Educacion> eduList;
 
     //Constructores
-
-
     public Persona() {
     }
 

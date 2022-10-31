@@ -34,8 +34,8 @@ public class SPersona {
         return personaRepo.existsByNombre(nombre);
     }
 
-  public Persona buscarPersonaPorId(Long id){
-      return personaRepo.findById(id).orElse(null);
+  public Iterable<Persona> buscarPersona(){
+      return personaRepo.findAll();
   }
 
 }

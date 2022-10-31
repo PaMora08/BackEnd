@@ -9,11 +9,22 @@ public class NuevoUsuario {
     @NotBlank
     private String nombre;
     @NotBlank
+    private String nombreUsuario;
+    @NotBlank
     @Email
     private String email;
     @NotBlank
     private String password;
     private Set<String> roles = new HashSet<>();
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
 
     public String getNombre() {
         return nombre;
