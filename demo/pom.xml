@@ -12,9 +12,9 @@
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>portfolio</name>
-	<description>portfolio argentina programa</description>
+	<description>portfolioargentinaprograma</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -86,6 +86,15 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+						<encoding>utf8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>

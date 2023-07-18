@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/laboral")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://portfoliopamorales.web.app")
 public class ExperienciaController {
     @Autowired
     SExperiencia sExperiencia;

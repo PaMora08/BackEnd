@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/proyectos")
-@CrossOrigin (origins = "http://localhost:4200")
+@CrossOrigin (origins = "https://portfoliopamorales.web.app")
 public class ProyectoController {
     @Autowired
     SProyecto proyServ;
