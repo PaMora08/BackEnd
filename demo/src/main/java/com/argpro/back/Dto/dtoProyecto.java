@@ -1,20 +1,18 @@
 package com.argpro.back.Dto;
 
-import lombok.Getter;
 import lombok.Setter;
+import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 
-@Setter
-@Getter
 public class dtoProyecto {
     @NotBlank
-    public String nombreProy;
+    @Getter @Setter public String nombreProy;
     @NotBlank
-    public String descripcion;
+    @Getter @Setter public String descripcion;
     @NotBlank
-    public String urlProyecto;
-    public String imgProyecto;
+    @Getter @Setter public String urlProyecto;
+    @Getter @Setter public String imgProyecto;
 
 
     public dtoProyecto() {
@@ -26,4 +24,5 @@ public class dtoProyecto {
         this.urlProyecto = urlProyecto;
         this.imgProyecto = imgProyecto;
     }
+    
 }
